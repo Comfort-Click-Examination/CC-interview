@@ -16,8 +16,9 @@ abstract class Test
     public function observe(callable $callBack)
     {
         try {
-            $measure = Benchmark::value($callBack);
-            dump("Output : $measure[0]", "Query Execution Time : $measure[1] ms");
+            $measure = Benchmark::measure($callBack);
+            $output = $callBack();
+            dump("Output : $output", "Query Execution Time : $measure ms");
         } catch (\Throwable $th) {
             throw $th;
         }
